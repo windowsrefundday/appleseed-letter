@@ -115,15 +115,15 @@ Measured off the reference (ink bounding box as a percent of the page):
 
 | Property | Icon | card | sheet |
 |:---------|-----:|-----:|------:|
-| Top of block | 6.5% | 7.0% | 7.0% |
-| Block height | about 70% | 70.7% | 69.3% |
-| Left margin | 10.6% | 10.0% | 10.1% |
-| Block width | about 82% | 83.3% | 79.6% |
-| Bottom margin | about 23.5% | 22.2% | 23.7% |
+| Top of block | 6.5% | 7.1% | 7.2% |
+| Block height | about 81% | 79.9% | 80.0% |
+| Left margin | 9.4% | 9.2% | 9.7% |
+| Block width | about 70% | 67.2% | 72.4% |
+| Bottom margin | 12.9% | 12.9% | 12.8% |
 
-The card is 12 pt on 20 pt leading. The sheet is 22 pt on 35.6 pt. Small type with loose leading, which is most of the look. About 59 characters per line. Left aligned, ragged right, no hyphenation, blank line between paragraphs. Color is near black (card #1b1b1b, sheet #141414), not full K, so it reads soft like the icon but still prints dark. Apostrophes are proper curly quotes, checked in the PDF text layer.
+The card is 12 pt on 21 pt leading. The sheet is 22 pt on 38 pt. Small type with loose leading, which is most of the look. About 59 characters per line. Left aligned, ragged right, no hyphenation, blank line between paragraphs. Color is near black (card #1b1b1b, sheet #141414), not full K, so it reads soft like the icon but still prints dark. Apostrophes are proper curly quotes, checked in the PDF text layer. The line breaks are fixed to the icon's: all 14 text lines break on the same words, checked by extracting the PDF text and diffing it against the transcription.
 
-The face is Times New Roman, regular. I picked it because it is on every machine and every print shop, so the PDF prints the same anywhere. Honestly, at icon resolution the glyphs are 7 px tall, which tells you serif versus sans but not Times versus Garamond. If you want the period pick, Apple Garamond (Apple's corporate face from 1984 to 2003) is the one. Set `font` in VARIANTS and rebuild. EB Garamond is a decent free stand-in.
+The face is EB Garamond, regular, embedded in the PDFs (open source, SIL license, shipped in `fonts/`). I landed there by measuring the icon at the pixel level: stems flare into small feet top and bottom with thick-thin contrast and no slant, so serif and upright, and at matched x-height EB Garamond renders the icon's lines at exactly the icon's width (173 px on the test line) where Times runs 9 px wide and Arial 30 px wide. The letter and A4 variants stay in Times New Roman, since those are meant as ordinary correspondence, not replicas. If you want to swap faces, set `font` in VARIANTS and rebuild.
 
 ## Paper and printing
 
@@ -184,18 +184,19 @@ You need Python 3 and Chrome (it is the PDF engine, so typefaces embed exactly).
 ```text
 build.py                            HTML to PDF engine (headless Chrome, exact page boxes)
 curl_guide.py                       crease diagrams
-out/appleseed-letter_card.pdf       5 x 6 in, icon proportions, the replica (33K)
-out/appleseed-letter_card-trim.pdf  Letter sheet with cut guides and crop marks (51K)
-out/appleseed-letter_sheet.pdf      8.5 x 11 in, same layout at life size (34K)
-out/appleseed-letter_letter.pdf     8.5 x 11 in, normal 14 pt letter (34K)
-out/appleseed-letter_a4.pdf         A4, same as letter (34K)
+fonts/EBGaramond.ttf + OFL.txt      the replica face, embedded in the PDFs
+out/appleseed-letter_card.pdf       5 x 6 in, icon proportions, the replica
+out/appleseed-letter_card-trim.pdf  Letter sheet with cut guides and crop marks
+out/appleseed-letter_sheet.pdf      8.5 x 11 in, same layout at life size
+out/appleseed-letter_letter.pdf     8.5 x 11 in, normal 14 pt letter
+out/appleseed-letter_a4.pdf         A4, same as letter
 out/curl-guide_*.png                dimensioned crease geometry
 out/pdf-proof_*.png                 renders of the actual PDFs
 ```
 
 ## Notes and limits
 
-Font certainty: the words, proportions, alignment, leading, and ink are measured from the reference. The face is inferred, see Typography for how to check it and swap it.
+Font certainty: the words, breaks, proportions, alignment, leading, and ink are measured from the reference, and the Garamond-style face is confirmed by pixel measurement plus a glyph check of the finished PDF. See Typography.
 
 Copyright: the manifesto is Apple's 1997 ad copy. Fine as a personal replica, do not sell it.[^2]
 

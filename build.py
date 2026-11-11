@@ -50,17 +50,42 @@ LETTER = [
 
 SIGN = ["Take care,", "John Appleseed"]
 
+# The icon's exact line breaks, transcribed from the reference: with these,
+# every replica variant breaks exactly where the icon does, whatever the
+# renderer. "" = blank line. (Used by card, card-trim and sheet.)
+ICON_LINES = [
+    "Dear Kate,",
+    "",
+    "Here’s to the crazy ones. The misfits. The rebels.",
+    "The troublemakers. The round pegs in the square",
+    "holes. The ones who see things differently. They’re",
+    "not fond of rules. And they have no respect for the",
+    "status quo. You can quote them, disagree with them,",
+    "glorify or vilify them. About the only thing you can’t",
+    "do is ignore them. Because they change things.",
+    "",
+    "They push the human race forward. And while some",
+    "may see them as the crazy ones, we see genius.",
+    "Because the people who are crazy enough to think",
+    "they can change the world, are the ones who do.",
+    "",
+    "Take care,",
+    "John Appleseed",
+]
+
 # Icon reference geometry, measured off the 256px reference: the text block
 # starts about 6.5% down the page and ends about 74% down, with a left margin
 # near 10.6% and a block about 82% of the sheet width.
 VARIANTS = {
     "card": dict(
-        page=(5, 6), pad=(0.34, 0.33, 1.30, 0.50),
-        size=12.0, leading=1.66, color="#1b1b1b", font="Times New Roman",
+        page=(5, 6), pad=(0.34, 1.08, 1.30, 0.47),
+        size=12.0, leading=1.74, color="#1b1b1b", font="EB Garamond",
+        hard_lines=True,
     ),
     "sheet": dict(
         page=(8.5, 11), pad=(0.62, 0.85, 2.30, 0.85),
-        size=22.0, leading=1.62, color="#141414", font="Times New Roman",
+        size=22.0, leading=1.74, color="#141414", font="EB Garamond",
+        hard_lines=True,
     ),
     "letter": dict(
         page=(8.5, 11), pad=(1.20, 1.10, 1.10, 1.10),
@@ -71,9 +96,9 @@ VARIANTS = {
         size=14.0, leading=1.50, color="#141414", font="Times New Roman",
     ),
     "card-trim": dict(
-        page=(8.5, 11), pad=(0.34, 0.33, 1.30, 0.50),
-        size=12.0, leading=1.66, color="#1b1b1b", font="Times New Roman",
-        trim=True, trim_w=5, trim_h=6,
+        page=(8.5, 11), pad=(0.34, 1.08, 1.30, 0.47),
+        size=12.0, leading=1.66, color="#1b1b1b", font="EB Garamond",
+        trim=True, trim_w=5, trim_h=6, hard_lines=True,
     ),
 }
 
@@ -88,9 +113,20 @@ def find_chrome() -> str:
     sys.exit("Could not find Chrome. Install it or edit CHROME_CANDIDATES.")
 
 
+def font_face() -> str:
+    ttf = (ROOT / "fonts" / "EBGaramond.ttf").as_uri()
+    return f"""@font-face {{
+    font-family:"EB Garamond";
+    src:url("{ttf}") format("truetype");
+    font-weight:400; font-style:normal;
+  }}"""
+
+
 def html_for(spec: dict) -> str:
     if spec.get("trim"):
         return html_for_trim(spec)
+    if spec.get("hard_lines"):
+        return html_for_hard(spec)
     top, right, bottom, left = spec["pad"]
     paras = []
     for text, gap in LETTER:
@@ -106,7 +142,7 @@ def html_for(spec: dict) -> str:
   .sheet {{
     width:{w}in; height:{h}in; box-sizing:border-box;
     padding:{top}in {right}in {bottom}in {left}in;
-    font-family:"{spec['font']}", Times, "Liberation Serif", serif;
+    font-family:"{spec['font']}", "Times New Roman", Times, "Liberation Serif", serif;
     font-size:{spec['size']}pt;
     line-height:{spec['leading']};
     color:{spec['color']};
@@ -115,6 +151,7 @@ def html_for(spec: dict) -> str:
   }}
   p {{ margin:0; padding:0; }}
   .sign {{ margin:0; }}
+  {font_face()}
 </style></head>
 <body><div class="sheet">
 {chr(10).join(paras)}
@@ -125,11 +162,15 @@ def html_for(spec: dict) -> str:
 
 def html_for_trim(spec: dict) -> str:
     top, right, bottom, left = spec["pad"]
-    paras = []
-    for text, gap in LETTER:
-        style = ' style="margin-bottom:1em"' if gap else ""
-        paras.append(f"<p{style}>{text}</p>")
-    sign = "".join(f"<p>{line}</p>" for line in SIGN)
+    if spec.get("hard_lines"):
+        paras = "<br>\n".join(p if p else "&nbsp;" for p in ICON_LINES)
+    else:
+        parts = []
+        for text, gap in LETTER:
+            style = ' style="margin-bottom:1em"' if gap else ""
+            parts.append(f"<p{style}>{text}</p>")
+        parts.append("".join(f"<p>{line}</p>" for line in SIGN))
+        paras = "\n".join(parts)
     w, h = spec["page"]
     tw, th = spec["trim_w"], spec["trim_h"]
     return f"""<!doctype html>
@@ -145,7 +186,7 @@ def html_for_trim(spec: dict) -> str:
   .card {{
     width:{tw}in; height:{th}in; box-sizing:border-box;
     padding:{top}in {right}in {bottom}in {left}in;
-    font-family:"{spec['font']}", Times, "Liberation Serif", serif;
+    font-family:"{spec['font']}", "Times New Roman", Times, "Liberation Serif", serif;
     font-size:{spec['size']}pt;
     line-height:{spec['leading']};
     color:{spec['color']};
@@ -163,6 +204,7 @@ def html_for_trim(spec: dict) -> str:
     position:absolute; font-family:Arial, Helvetica, sans-serif;
     font-size:7pt; color:#555; white-space:nowrap;
   }}
+  {font_face()}
 </style></head>
 <body><div class="outer">
 <div class="card">
@@ -175,9 +217,35 @@ def html_for_trim(spec: dict) -> str:
 <div class="mark v" style="left:-0.75pt; bottom:-0.28in;"></div>
 <div class="mark v" style="right:-0.75pt; bottom:-0.28in;"></div>
 <div class="lbl" style="top:-0.22in; left:0.08in;">cut along black border — 5 x 6 in</div>
-{chr(10).join(paras)}
-<div class="sign">{sign}</div>
+{paras}
 </div>
+</div></body></html>
+"""
+
+
+def html_for_hard(spec: dict) -> str:
+    top, right, bottom, left = spec["pad"]
+    w, h = spec["page"]
+    lines = "<br>\n".join(p if p else "&nbsp;" for p in ICON_LINES)
+    return f"""<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  @page {{ size: {w}in {h}in; margin: 0; }}
+  html, body {{ margin:0; padding:0; background:#fff; }}
+  .sheet {{
+    width:{w}in; height:{h}in; box-sizing:border-box;
+    padding:{top}in {right}in {bottom}in {left}in;
+    font-family:"{spec['font']}", "Times New Roman", Times, "Liberation Serif", serif;
+    font-size:{spec['size']}pt;
+    line-height:{spec['leading']};
+    color:{spec['color']};
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+    text-rendering:optimizeLegibility; font-kerning:normal;
+  }}
+  {font_face()}
+</style></head>
+<body><div class="sheet">
+{lines}
 </div></body></html>
 """
 
@@ -194,12 +262,14 @@ def build(name: str, chrome: str) -> Path:
 
     subprocess.run(
         [chrome, "--headless=new", "--disable-gpu", "--no-pdf-header-footer",
+         "--allow-file-access-from-files",
          "--virtual-time-budget=3000", f"--print-to-pdf={pdf_path}", uri],
         check=True, capture_output=True, timeout=120,
     )
     subprocess.run(
         [chrome, "--headless=new", "--disable-gpu", f"--screenshot={png_path}",
          f"--window-size={round(w*96)},{round(h*96)}",
+         "--allow-file-access-from-files",
          "--force-device-scale-factor=2", "--hide-scrollbars",
          "--virtual-time-budget=3000", uri],
         check=True, capture_output=True, timeout=120,
