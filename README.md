@@ -1,107 +1,89 @@
-# 📄 The Appleseed Letter
+# The Appleseed Letter
 
-> *A physical replica of Apple's TextEdit icon — the same words, the same type, the same sheet, with a real rolled corner.*
+A physical replica of Apple's TextEdit icon. Same words, same type, same sheet, with a real rolled corner.
 
 ![print-ready](https://img.shields.io/badge/print--ready-100%25-brightgreen)
-![page-card](https://img.shields.io/badge/card-5%C3%97%206in-blue)
-![page-letter](https://img.shields.io/badge/letter-8.5%C3%97%2011in-lightgrey)
-![type-Times](https://img.shields.io/badge/type-Times_New_Roman-black)
-![license-personal-use](https://img.shields.io/badge/use-personal_only-orange)
+![card](https://img.shields.io/badge/card-5x6in-blue)
+![letter](https://img.shields.io/badge/letter-8.5x11in-lightgrey)
+![license](https://img.shields.io/badge/use-personal_only-orange)
 
----
+## Contents
 
-## 📖 Contents
+- [What this is](#what-this-is)
+- [Print me](#print-me)
+- [Gallery](#gallery)
+- [The text](#the-text)
+- [Typography](#typography)
+- [Paper and printing](#paper-and-printing)
+- [The curl](#the-curl)
+- [Display it](#display-it)
+- [Build order](#build-order)
+- [Rebuild from source](#rebuild-from-source)
+- [Files](#files)
+- [Notes and limits](#notes-and-limits)
 
-- [✨ What this is](#-what-this-is)
-- [⬇️ Print me](#️-print-me)
-- [🖼️ Gallery](#️-gallery)
-- [🔤 The text, exactly](#-the-text-exactly)
-- [✒️ Typography](#️-typography)
-- [🧻 Paper & printing](#-paper--printing)
-- [🌀 The curl](#-the-curl)
-- [🖼️ Display it](#️-display-it)
-- [✅ Build order](#-build-order)
-- [🛠️ Rebuild from source](#️-rebuild-from-source)
-- [🗂️ Files](#️-files)
-- [⚖️ Notes & limits](#️-notes--limits)
+## What this is
 
----
+This is not a photo of a document. It is Apple's TextEdit app icon, the version that shipped from Mac OS X 10.5 Leopard (2007) through 10.9 Mavericks. Blow the icon up in Finder and the "paper" turns out to have a letter printed on it.[^1]
 
-## ✨ What this is
+The text is the Think Different manifesto, written by Rob Siltanen and Ken Segall at TBWA Chiat Day in 1997 and read by Richard Dreyfuss. The icon carries a cut down version: two paragraphs instead of the ad's five, with "They push the human race forward" moved up to open the second one.
 
-This is **not** a photograph of a document. It is **Apple's TextEdit application icon** —
-the version that shipped from **Mac OS X 10.5 Leopard (2007)** through **10.9 Mavericks**.
-Maximize the icon in Finder and the "paper" turns out to have a letter printed on it.[^1]
-
-| Fact | Detail |
-|:-----|:-------|
-| 📝 Text | The **"Think Different" manifesto** — Rob Siltanen & Ken Segall, TBWA\Chiat\Day, 1997, voiced by Richard Dreyfuss |
-| ✂️ Icon edit | Condensed to **two paragraphs**; *"They push the human race forward"* moved up to open ¶2 |
-| 🙋 `John Appleseed` | Apple's stand-in demo user — same reason every sample contact is John Appleseed |
-| 💌 `Kate` | Generally read as the KDE text editor *Kate* — an editor writing to another editor |
-| 🕰️ Window | Letter only exists **2007–2014**; replaced by a blank sheet + pen in Yosemite |
+John Appleseed is Apple's stand-in name for a demo user, the same reason every sample contact is John Appleseed. Kate is generally read as the KDE text editor Kate, so it is an editor writing to another editor. In 10.10 Yosemite the letter was replaced with a blank sheet and a pen. The letter only existed from 2007 to 2014, which is why the icon is a small piece of Mac lore.
 
 <details>
-<summary><b>Why three sizes? There's no single "correct" one — click to see why</b></summary>
+<summary>Why three sizes</summary>
 
-1. **It is not a real document.** The icon is 5:6 (1.20), not Letter (1.29) or A4 (1.41), and its type is ~7 px tall.
-   Scale it 1:1 to Letter and type lands at ~23 pt; keep normal 12 pt type on Letter and the text fills only the top third.
-2. **The curl is load-bearing.** In the icon the rolled corner covers the ends of the first three lines.
-   A faithful replica hides the same words — exactly like the original.
+There is no single correct size, because the icon was never a real document. It is 5:6, not Letter (1.29) or A4 (1.41), and its type is about 7 px tall. Scale it 1:1 to Letter and the type lands near 23 pt. Keep normal 12 pt type on Letter and the text only fills the top third.
 
-So: `card` = icon proportions, `sheet` = same composition at life size, `letter`/`a4` = a normal letter you could hand someone.
+Also, the curl covers the ends of the first three lines in the icon. A faithful replica hides the same words. That is the point, but it means the card build is not fully readable once curled.
+
+So this repo ships three: card (icon proportions), sheet (same layout at life size), and letter/A4 (a normal letter you could hand someone).
 
 </details>
 
 > [!IMPORTANT]
-> Print at **100% / Actual size** with **no scaling** and **no header/footer** — or the geometry below won't hold.
+> Print at 100 percent (Actual size) with no scaling and no header or footer, or the geometry below will not hold.
 
----
+## Print me
 
-## ⬇️ Print me
-
-| Pick one | Size | Use it for | File |
-|:---------|:-----|:-----------|:-----|
-| 🏆 **Replica** | 5 × 6 in | the 1:1 icon object | [`out/appleseed-letter_card.pdf`](out/appleseed-letter_card.pdf) |
-| ✂️ **Replica + cut guides** | Letter sheet, 5 × 6 card centered | print on US Letter, cut along the line | [`out/appleseed-letter_card-trim.pdf`](out/appleseed-letter_card-trim.pdf) |
-| 🖼️ **Poster** | 8.5 × 11 in | same composition, life size, framable | [`out/appleseed-letter_sheet.pdf`](out/appleseed-letter_sheet.pdf) |
-| ✉️ **Letter** | 8.5 × 11 in | a normal letter (14 pt), human scale | [`out/appleseed-letter_letter.pdf`](out/appleseed-letter_letter.pdf) |
-| 🇪🇺 **A4** | 210 × 297 mm | same as letter, A4 paper | [`out/appleseed-letter_a4.pdf`](out/appleseed-letter_a4.pdf) |
+| File | Size | For |
+|:-----|:-----|:----|
+| [`out/appleseed-letter_card.pdf`](out/appleseed-letter_card.pdf) | 5 x 6 in | the replica, icon proportions |
+| [`out/appleseed-letter_card-trim.pdf`](out/appleseed-letter_card-trim.pdf) | Letter sheet, 5 x 6 card centered | print on US Letter, cut along the line |
+| [`out/appleseed-letter_sheet.pdf`](out/appleseed-letter_sheet.pdf) | 8.5 x 11 in | same layout at life size, framable |
+| [`out/appleseed-letter_letter.pdf`](out/appleseed-letter_letter.pdf) | 8.5 x 11 in | a normal 14 pt letter |
+| [`out/appleseed-letter_a4.pdf`](out/appleseed-letter_a4.pdf) | 210 x 297 mm | same as letter, on A4 |
 
 ```bash
-# fastest path — one evening, under an hour hands-on
-1. print card-trim at 100% ............ 10 min
-2. check density, cut along border .....  5 min
-3. curl the corner (see below) ......... 10 min
-4. mount or photograph ................. 20 min
+# one evening, under an hour of hands-on work
+1. print card-trim at 100 percent .... 10 min
+2. check density, cut along border ....  5 min
+3. curl the corner (see below) ........ 10 min
+4. mount or photograph ............... 20 min
 ```
 
 > [!TIP]
-> Print **two copies** on the good stock — one to curl, one to keep flat as a control.
+> Print two copies on the good stock. Curl one, keep one flat as a control.
 
----
+## Gallery
 
-## 🖼️ Gallery
-
-### The replica (`card`, 5 × 6 in)
+The replica (card, 5 x 6 in):
 
 ![card proof](out/pdf-proof_card.png)
 
-### Trim version (Letter sheet, cut along the border)
+Trim version (Letter sheet, cut along the border):
 
 ![trim proof](out/appleseed-letter_card-trim.png)
 
-### Life size (`sheet`, 8.5 × 11 in)
+Life size (sheet, 8.5 x 11 in):
 
 ![sheet proof](out/pdf-proof_sheet.png)
 
-### Crease geometry (`card`)
+Crease geometry (card):
 
 ![curl guide card](out/curl-guide_card.png)
 
----
-
-## 🔤 The text, exactly
+## The text
 
 > Dear Kate,
 >
@@ -119,151 +101,105 @@ So: `card` = icon proportions, `sheet` = same composition at life size, `letter`
 > John Appleseed
 
 <details>
-<summary>Variants in the wild</summary>
+<summary>Other wordings out there</summary>
 
-| Version | Difference |
-|:--------|:-----------|
-| 🖥️ **Icon (this build)** | *"You can quote them…"* · two paragraphs · *"Take care,"* |
-| 📺 **1997 print + TV** | *"…disagree with them, <ins>disbelieve</ins> them…"* + the *"They invent. They imagine. They heal."* paragraph |
-| 👴 **Older / low-res icons** | Longer lines: *"You can praise them, disagree with them, quote them, disbelieve them…"* |
+The 1997 print and TV version reads "disagree with them, disbelieve them" (the icon drops "disbelieve") and includes the "They invent. They imagine. They heal." paragraph. Older low-res icons run longer lines: "You can praise them, disagree with them, quote them, disbelieve them..." This build follows the icon.
 
-To swap text, edit `LETTER` in `build.py`.
+To change the wording, edit LETTER in build.py.
 
 </details>
 
----
+## Typography
 
-## ✒️ Typography
+Measured off the reference (ink bounding box as a percent of the page):
 
-Measured off the reference (ink bounding box as % of page):
-
-| Property | Icon | `card` | `sheet` |
-|:---------|-----:|-------:|--------:|
+| Property | Icon | card | sheet |
+|:---------|-----:|-----:|------:|
 | Top of block | 6.5% | 7.0% | 7.0% |
-| Block height | ~70% | 70.7% | 69.3% |
+| Block height | about 70% | 70.7% | 69.3% |
 | Left margin | 10.6% | 10.0% | 10.1% |
-| Block width | ~82% | 83.3% | 79.6% |
-| Bottom margin | ~23.5% | 22.2% | 23.7% |
+| Block width | about 82% | 83.3% | 79.6% |
+| Bottom margin | about 23.5% | 22.2% | 23.7% |
 
-- [x] **Size / leading** — card 12 pt on 20 pt (1.66×); sheet 22 pt on 35.6 pt. Small but *loosely* leaded — that airiness is most of the look.
-- [x] **Measure** — ~59 chars/line. Narrow, so paragraphs break in short stacks.
-- [x] **Alignment** — left, ragged right, no hyphenation. Blank line between paragraphs.
-- [x] **Colour** — near-black (`#1b1b1b` card / `#141414` sheet), not 100% K. Prints dark, reads soft like the icon.
-- [x] **Punctuation** — proper curly apostrophes (`Here’s`, `They’re`, `can’t`). Verified in PDF text extraction.
-- [ ] **Typeface** — **Times New Roman**, regular. Closest face present on every machine and print shop, so the PDF prints identically anywhere.
+The card is 12 pt on 20 pt leading. The sheet is 22 pt on 35.6 pt. Small type with loose leading, which is most of the look. About 59 characters per line. Left aligned, ragged right, no hyphenation, blank line between paragraphs. Color is near black (card #1b1b1b, sheet #141414), not full K, so it reads soft like the icon but still prints dark. Apostrophes are proper curly quotes, checked in the PDF text layer.
 
-> [!NOTE]
-> At icon resolution the glyphs are ~7 px — enough to tell serif from sans, not Times from Garamond.
-> **Apple Garamond** (Apple's 1984–2003 corporate face) is the connoisseur's swap: set `font` in `VARIANTS` and rebuild.
-> Free stand-in: *EB Garamond*. Check it yourself at 1024 px: compare the `a`, `e`, `t`, and the `ff` in "misfits".
+The face is Times New Roman, regular. I picked it because it is on every machine and every print shop, so the PDF prints the same anywhere. Honestly, at icon resolution the glyphs are 7 px tall, which tells you serif versus sans but not Times versus Garamond. If you want the period pick, Apple Garamond (Apple's corporate face from 1984 to 2003) is the one. Set `font` in VARIANTS and rebuild. EB Garamond is a decent free stand-in.
 
----
+## Paper and printing
 
-## 🧻 Paper & printing
+The icon's sheet is flat, bright white, matte, a touch warm. Photocopier white, not cream. Match that.
 
-The icon's sheet is flat, bright white, matte, slightly warm — photocopier white, not cream. Match that.
+| Layer | What to get | Why |
+|:------|:------------|:----|
+| Paper | Uncoated, 100 to 120 gsm (24 to 32 lb), smooth, laser rated, 96 to 100 brightness | Holds 12 pt type crisply and still takes a curl |
+| Avoid | 80 gsm office paper (too floppy), 270 gsm card (will not curl), coated or glossy (cracks on a roll) | |
+| Ink | Full black toner from a laser, or pigment black inkjet | Toner sits on the surface, sharpest small type |
+| Grain | Long grain, and curl with the grain | Rolls smooth, holds the set |
 
-| Layer | Spec | Why |
-|:------|:-----|:----|
-| 📄 Paper | **Uncoated, 100–120 gsm (24–32 lb), smooth, laser-rated**, 96–100 brightness | Holds 12 pt crisply, still takes a curl |
-| 🚫 Avoid | 80 gsm office (floppy) · 270 gsm+ card (won't curl) · coated/glossy (cracks) | — |
-| 🖨️ Ink | 100% K toner (laser) or pigment black (inkjet) | Toner sits on top = sharpest small type |
-| 🌾 Grain | Long grain, curl *with* the grain | Rolls smoothly, holds the set |
+Stocks that behave: Mohawk Superfine Eggshell White 100 lb text, Neenah Classic Crest Solar White 80 lb, Southworth 32 lb (home), HP Premium32 120 gsm (home).
 
-Concrete stocks: *Mohawk Superfine Eggshell White 100 lb text* · *Neenah Classic Crest Solar White 80 lb* · *Southworth 32 lb* (home) · *HP Premium32 120 gsm* (home).
-
-1. **Print shop** — digital laser, 1200 dpi, your own 100 lb stock. *"Black only, no scaling, 100%."* ~$1–3.
-2. **Home laser** — 32 lb laser paper, driver on *best / 1200 dpi*, *fit-to-page off*.
-3. **Inkjet** (e.g. HP ENVY) — *matte* paper, quality slider maxed. Fine at 12 pt; softer than laser on the big sheet.
-4. **Letterpress** — polymer plate from the PDF, 1–2 pt impression. Beautiful. Most expensive way to do it.
+Best options in order. A print shop with a 1200 dpi digital laser, on your own 100 lb stock, asking for black only at 100 percent, runs a few dollars. A home laser on 32 lb paper with the driver on best and fit-to-page off is nearly as good. Inkjet on matte paper with quality maxed is fine at 12 pt on the card, softer on the big sheet. Letterpress from a polymer plate is the nicest and by far the most expensive way to do it.
 
 > [!WARNING]
-> Do **not** print a paper texture or fake shadow into the artwork. The object supplies both.
-> And never put inkjet glossy/photo paper in a laser printer — the coating melts.
+> Do not print a paper texture or a fake shadow into the file. The object itself supplies both. And never run inkjet glossy or photo paper through a laser printer, the coating melts.
 
----
+## The curl
 
-## 🌀 The curl
+This is the part that makes it read as the icon. The crease runs from 49 percent of the width along the top edge to 37 percent of the height down the right edge. On the card that is 2.45 in in from the top left, ending 2.22 in down the right edge. On the sheet it is 4.17 in and 4.07 in. The curl guide images show it dimensioned.
 
-The part that makes it read as the icon. Measured: crease runs from **49% of the width** (top edge) to **37% of the height** (right edge).
+Method A, dry roll (start here, it is reversible). Lay the sheet face down on something clean and hard. Put a 1 in dowel or rolling pin diagonally under the corner. Wrap the corner over the dowel and press it flat with your palm for ten seconds. Release, rotate the dowel 90 degrees, roll again. Three or four passes in slightly different directions give the paper a curved memory instead of a crease. Finish tighter at the tip so it tapers the way the icon's does.
 
-- 📐 Card: starts **2.45 in** in from top-left → ends **2.22 in** down the right edge
-- 📐 Sheet: **4.17 in** → **4.07 in**
-- 🗺️ See `out/curl-guide_card.png` / `out/curl-guide_sheet.png`, dimensioned
+Method B, moisture set (permanent but still reversible). Mist the back of the corner very lightly with a damp sponge, not a spray. Roll it, clip the roll to the dowel with a binder clip, and let it dry ten to fifteen minutes. Paper shrinks as it dries and locks the curve in. Test on scrap first, too much water leaves marks on uncoated stock.
 
-### Method A — dry roll *(start here, reversible)*
-
-1. Lay the sheet **face down** on a clean, hard surface
-2. Put a <kbd>1 in</kbd> dowel / rolling pin diagonally under the corner
-3. Wrap the corner over the dowel, press flat with your palm — hold 10 s
-4. Release, rotate 90°, roll again — 3–4 passes gives *memory*, not a crease
-5. Finish tighter at the tip so it tapers like the icon's
-
-### Method B — moisture set *(permanent, still reversible)*
-
-Mist the **back** of the corner *very* lightly (damp sponge, not spray) → roll → clip to the dowel with a binder clip → dry 10–15 min. Test on scrap first — too much water tidemarks uncoated stock.
-
-### Method C — steam *(crispest)*
-
-Two seconds over a kettle spout, then roll and clip. Same physics as B, faster, easier to overdo.
+Method C, steam (crispest). Two seconds over a kettle spout, then roll and clip. Same idea as B, faster, easier to overdo.
 
 > [!TIP]
-> A **half-drop of PVA** under the roll's underside (invisible) or an hour under a weight stops it relaxing.
-> Want it fully readable instead? Roll only a **1 in** corner — same gesture, none hidden.
+> A half drop of PVA glue under the underside of the roll is invisible and stops it relaxing. An hour under a weight works too. If you want the whole letter readable, roll only a 1 in corner instead. Same gesture, nothing hidden.
 
----
+## Display it
 
-## 🖼️ Display it
+Float it on eighth inch foam board with two Japanese tissue hinges on the back (archival, removable), or stand it on a small clear acrylic easel. If you frame it, use a shadow box at least 1 in deep. A standard frame will flatten the curl and undo the work.
 
-- **Mount** — float on ⅛ in foam board with two Japanese-tissue hinges (archival, removable), or a small clear acrylic easel
-- **Frame** — shadow box, **minimum 1 in deep**. A standard frame flattens the curl and undoes the work.
-- **Light** — one soft source, upper left, 45°, large + diffused. The icon's whole read is that soft shadow; hard light kills it.
-- **Photo** — white sweep, camera slightly above center at ~15° tilt, 50 mm at f/8, expose for the paper not the shadow
+Light it with one soft source from the upper left at 45 degrees, big and diffused. The icon's whole look is that soft shadow under the curl, and hard light kills it. For photos, white sweep, camera slightly above center tilted down about 15 degrees, expose for the paper rather than the shadow.
 
----
-
-## ✅ Build order
+## Build order
 
 - [x] Reference measured, text transcribed, geometry matched
 - [x] PDFs built with embedded Times, exact page boxes, curly quotes
-- [x] Proofs rendered + read back, trim + curl guides drawn
-- [ ] **You:** print → cut → curl → mount / photograph
+- [x] Proofs rendered and read back, trim and curl guides drawn
+- [ ] You: print, cut, curl, mount or photograph
 
----
-
-## 🛠️ Rebuild from source
+## Rebuild from source
 
 ```bash
-python build.py --measure      # all variants + geometry report
-python build.py card           # one variant: card | card-trim | sheet | letter | a4
-python curl_guide.py           # redraw crease diagrams
+python build.py --measure      # all variants plus geometry report
+python build.py card           # one variant: card, card-trim, sheet, letter, a4
+python curl_guide.py           # redraw the crease diagrams
 ```
 
-Requirements: `Python 3` + `Chrome` (used as the PDF engine so typefaces embed exactly). Pillow only for the proof renders.
+You need Python 3 and Chrome (it is the PDF engine, so typefaces embed exactly). Pillow is only for the proof renders.
 
----
-
-## 🗂️ Files
+## Files
 
 ```text
-build.py                            HTML → PDF engine (headless Chrome, exact page boxes)
+build.py                            HTML to PDF engine (headless Chrome, exact page boxes)
 curl_guide.py                       crease diagrams
-out/appleseed-letter_card.pdf       5 × 6 in — icon proportions, the replica (33K)
-out/appleseed-letter_card-trim.pdf  Letter sheet with cut guides + crop marks (51K)
-out/appleseed-letter_sheet.pdf      8.5 × 11 in — same composition, life size (34K)
-out/appleseed-letter_letter.pdf     8.5 × 11 in — normal 14 pt letter (34K)
-out/appleseed-letter_a4.pdf         A4 — same as letter (34K)
+out/appleseed-letter_card.pdf       5 x 6 in, icon proportions, the replica (33K)
+out/appleseed-letter_card-trim.pdf  Letter sheet with cut guides and crop marks (51K)
+out/appleseed-letter_sheet.pdf      8.5 x 11 in, same layout at life size (34K)
+out/appleseed-letter_letter.pdf     8.5 x 11 in, normal 14 pt letter (34K)
+out/appleseed-letter_a4.pdf         A4, same as letter (34K)
 out/curl-guide_*.png                dimensioned crease geometry
 out/pdf-proof_*.png                 renders of the actual PDFs
 ```
 
----
+## Notes and limits
 
-## ⚖️ Notes & limits
+Font certainty: the words, proportions, alignment, leading, and ink are measured from the reference. The face is inferred, see Typography for how to check it and swap it.
 
-- **Font certainty.** Words, proportion, alignment, leading and ink are measured from the reference. The face is inferred — see [Typography](#️-typography) for the check and the swap.
-- **Copyright.** The manifesto is Apple's 1997 ad copy. Personal replica, fine; don't sell it. [^2]
-- **Fidelity quirk.** The icon's own text is cut off by the curl. Curl it as specified and your copy hides the same words — that's not a bug. Use the flat print to read it.
+Copyright: the manifesto is Apple's 1997 ad copy. Fine as a personal replica, do not sell it.[^2]
 
-[^1]: Wikipedia: [TextEdit](https://en.wikipedia.org/wiki/TextEdit) — *"The high-resolution TextEdit 1.5 icon found in Mac OS X versions starting with 10.5 (Leopard) features an extract from Apple's 'Think different' ad campaign."*
-[^2]: Text by Rob Siltanen & Ken Segall, TBWA\Chiat\Day, 1997. This project recreates the *icon's condensed arrangement* for personal/educational use.
+One fidelity quirk: the icon's own text is cut off by the curl. If you curl yours as specified, it hides the same words. That is not a bug. Keep the flat print if you want to read it.
+
+[^1]: Wikipedia: [TextEdit](https://en.wikipedia.org/wiki/TextEdit). "The high-resolution TextEdit 1.5 icon found in Mac OS X versions starting with 10.5 (Leopard) features an extract from Apple's 'Think different' ad campaign."
+[^2]: Text by Rob Siltanen and Ken Segall, TBWA Chiat Day, 1997. This project recreates the icon's condensed arrangement for personal and educational use.
