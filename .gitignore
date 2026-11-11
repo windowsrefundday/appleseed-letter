@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+vision_test.png
+view_*.png
+proof_*.png
